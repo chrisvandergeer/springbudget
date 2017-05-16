@@ -90,6 +90,11 @@ public class Transaktie {
         return Collections.unmodifiableSet(this.tags);
     }
 
+
+    public void removeTags() {
+        tags.clear();
+    }
+
     @Override
     public String toString() {
         return "Transaktie{" +
@@ -127,6 +132,5 @@ public class Transaktie {
         result = 31 * result + bedrag.hashCode();
         return result;
     }
-
 
 }

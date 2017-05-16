@@ -51,10 +51,11 @@ public class TransaktieBoundary {
     public BoundaryResult<List<TransaktieDto>> findAndTag(
             @RequestParam(value = "search", required = true) String search,
             @RequestParam(value = "tag", required = true) String tagName) {
-
         List<Transaktie> result = findTransaktiesService.find(Optional.of(search));
         Tag tag = maakTagService.maakOfHaalTag(tagName);
-        result.stream().map(t -> t.addTag(tag));
+        for (Transaktie t : result) {
+            t.addTag(tag);
+        }
         tag.addTransakties(result);
         return createResult(result);
     }

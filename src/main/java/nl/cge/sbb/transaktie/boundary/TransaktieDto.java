@@ -12,6 +12,7 @@ public class TransaktieDto {
     private BigDecimal bedrag;
     private String tegenrekening;
     private String rekening;
+    private String tags;
 
     public void setTransaktiedatum(String transaktiedatum) {
         this.transaktiedatum = transaktiedatum;
@@ -51,5 +52,17 @@ public class TransaktieDto {
 
     public String getRekening() {
         return rekening;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void addTag(String tag) {
+        if (tags == null) {
+            tags = tag;
+        } else {
+            tags = tags + ", " + tag;
+        }
     }
 }

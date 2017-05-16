@@ -26,7 +26,6 @@ public class FindTransaktiesService {
     }
 
     public List<Transaktie> findByRekeningnummer(String rekeningnummer, Optional<String> searchString) {
-        System.out.println("Zoeken op: " + searchString.orElse(""));
         return transakties.getWrappedTransakties().stream()
                 .filter(t -> rekeningnummer.equals(t.getTegenrekening().getNummer()))
                 .filter(t -> t.getOmschrijvingAsString().contains(searchString.orElse("")))
