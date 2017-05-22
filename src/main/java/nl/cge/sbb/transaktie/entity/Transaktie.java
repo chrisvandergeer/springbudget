@@ -95,6 +95,13 @@ public class Transaktie {
         tags.clear();
     }
 
+    public boolean hasTag(Optional<String> tag) {
+        if (tag.isPresent()) {
+            return getTags().stream().filter(t -> t.getNaam().equals(tag.get())).findAny().isPresent();
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Transaktie{" +
@@ -132,5 +139,4 @@ public class Transaktie {
         result = 31 * result + bedrag.hashCode();
         return result;
     }
-
 }

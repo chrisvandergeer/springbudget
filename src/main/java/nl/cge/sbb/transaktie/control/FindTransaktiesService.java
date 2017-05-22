@@ -19,9 +19,13 @@ public class FindTransaktiesService {
     private Transakties transakties;
 
     public List<Transaktie> find(Optional<String> searchString) {
+        TagMatcher tagMatcher = new TagMatcher(searchString);
+        Optional<String> tag = tagMatcher.getTag();
+        Optional<String> query = tagMatcher.getQuery();
         return transakties.getWrappedTransakties()
             .stream()
-            .filter(t -> t.getOmschrijvingAsString().contains(searchString.orElse("")))
+            .filter(t -> t.getOmschrijvingAsString().contains(query.orElse("")))
+            .filter(t -> t.hasTag(tag))
             .collect(Collectors.toList());
     }
 
