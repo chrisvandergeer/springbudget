@@ -1,6 +1,6 @@
 package nl.cge.sbb.transaktie.control;
 
-import nl.cge.sbb.transaktie.entity.Tag;
+import nl.cge.sbb.tag.entity.Tag;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import nl.cge.sbb.transaktie.entity.TransaktieBuilder;
 import org.junit.Test;

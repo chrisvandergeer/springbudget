@@ -1,5 +1,6 @@
 package nl.cge.sbb.transaktie.entity;
 
+import nl.cge.sbb.tag.entity.Tag;
 import org.junit.Before;
 import org.junit.Test;
 

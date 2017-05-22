@@ -1,5 +1,7 @@
 package nl.cge.sbb.transaktie.entity;
 
+import nl.cge.sbb.tag.entity.Tag;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;

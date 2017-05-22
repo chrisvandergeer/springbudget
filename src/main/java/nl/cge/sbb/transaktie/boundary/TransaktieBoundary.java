@@ -1,17 +1,19 @@
 package nl.cge.sbb.transaktie.boundary;
 
 import nl.cge.sbb.arch.boundary.BoundaryResult;
+import nl.cge.sbb.query.entity.QueryDao;
 import nl.cge.sbb.transaktie.control.FindTransaktiesService;
 import nl.cge.sbb.transaktie.control.ImportTransaktieService;
 import nl.cge.sbb.transaktie.control.MaakTagService;
 import nl.cge.sbb.transaktie.control.TransaktieDtoMapper;
-import nl.cge.sbb.transaktie.entity.Tag;
+import nl.cge.sbb.tag.entity.Tag;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import nl.cge.sbb.transaktie.entity.Transakties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -33,9 +35,16 @@ public class TransaktieBoundary {
     @Autowired
     private MaakTagService maakTagService;
 
+    @Autowired
+    private QueryDao queryDao;
+
     @RequestMapping(value = "/importeer", method = RequestMethod.POST)
     public BoundaryResult<Void> importeer() {
         Transakties transakties = importTransaktieService.execute("csvinput.csv");
+        Map<String, String> queriesWithTag = queryDao.readAll();
+        for (String query : queriesWithTag.keySet()) {
+            findAndTag(query, queriesWithTag.get(query));
+        }
         return BoundaryResult.success()
                 .setMessage(String.format("Aantal transakties: %s", transakties.getWrappedTransakties().size()));
     }
@@ -57,6 +66,9 @@ public class TransaktieBoundary {
             t.addTag(tag);
         }
         tag.addTransakties(result);
+        if (!result.isEmpty()) {
+            queryDao.save(search, tagName);
+        }
         return createResult(result);
     }
 

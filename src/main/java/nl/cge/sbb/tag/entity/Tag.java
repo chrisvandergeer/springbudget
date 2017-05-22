@@ -1,4 +1,6 @@
-package nl.cge.sbb.transaktie.entity;
+package nl.cge.sbb.tag.entity;
+
+import nl.cge.sbb.transaktie.entity.Transaktie;
 
 import java.util.Collection;
 import java.util.HashSet;

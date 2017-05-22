@@ -1,6 +1,6 @@
 package nl.cge.sbb.transaktie.control;
 
-import nl.cge.sbb.transaktie.entity.Tag;
+import nl.cge.sbb.tag.entity.Tag;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

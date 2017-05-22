@@ -2,7 +2,7 @@ package nl.cge.sbb.transaktie.control;
 
 import nl.cge.sbb.arch.control.Mapper;
 import nl.cge.sbb.transaktie.boundary.TransaktieDto;
-import nl.cge.sbb.transaktie.entity.Tag;
+import nl.cge.sbb.tag.entity.Tag;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import org.springframework.stereotype.Component;
 
