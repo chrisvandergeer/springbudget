@@ -25,5 +25,4 @@ public class TagBoundary {
                 .setMessage(String.format("Aantal verwijderde tags: %s", totaal));
     }
 
-
 }

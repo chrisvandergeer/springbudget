@@ -2,10 +2,7 @@ package nl.cge.sbb.transaktie.boundary;
 
 import nl.cge.sbb.arch.boundary.BoundaryResult;
 import nl.cge.sbb.query.entity.QueryDao;
-import nl.cge.sbb.transaktie.control.FindTransaktiesService;
-import nl.cge.sbb.transaktie.control.ImportTransaktieService;
-import nl.cge.sbb.transaktie.control.MaakTagService;
-import nl.cge.sbb.transaktie.control.TransaktieDtoMapper;
+import nl.cge.sbb.transaktie.control.*;
 import nl.cge.sbb.tag.entity.Tag;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import nl.cge.sbb.transaktie.entity.Transakties;
@@ -50,14 +47,14 @@ public class TransaktieBoundary {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public BoundaryResult<List<TransaktieDto>> findAll(
+    public List<TransaktieDto> findAll(
             @RequestParam(value = "search", required = false) String searchOrNull) {
-
-        return createResult(findTransaktiesService.find(Optional.ofNullable(searchOrNull)));
+        List<Transaktie> transakties = findTransaktiesService.find(Optional.ofNullable(searchOrNull));
+        return mapper.map(transakties);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public BoundaryResult<List<TransaktieDto>> findAndTag(
+    public List<TransaktieDto> findAndTag(
             @RequestParam(value = "search", required = true) String search,
             @RequestParam(value = "tag", required = true) String tagName) {
         List<Transaktie> result = findTransaktiesService.find(Optional.of(search));
@@ -69,7 +66,7 @@ public class TransaktieBoundary {
         if (!result.isEmpty()) {
             queryDao.save(search, tagName);
         }
-        return createResult(result);
+        return mapper.map(result);
     }
 
     @RequestMapping(value = "/datum/{jaar}", method = RequestMethod.GET)

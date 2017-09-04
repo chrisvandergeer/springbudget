@@ -1,25 +1,29 @@
 package nl.cge.sbb.transaktie.boundary;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by chris on 08-05-17.
  */
 public class TransaktieDto {
 
-    private String transaktiedatum;
+    private LocalDate transaktiedatum;
     private String omschrijving;
     private BigDecimal bedrag;
     private String tegenrekening;
     private String rekening;
-    private String tags;
+    private List<String> tags = new ArrayList<>();
 
-    public void setTransaktiedatum(String transaktiedatum) {
-        this.transaktiedatum = transaktiedatum;
+    public LocalDate getTransaktiedatum() {
+        return transaktiedatum;
     }
 
-    public String getTransaktiedatum() {
-        return transaktiedatum;
+    public void setTransaktiedatum(LocalDate transaktiedatum) {
+        this.transaktiedatum = transaktiedatum;
     }
 
     public void setOmschrijving(String omschrijving) {
@@ -54,15 +58,11 @@ public class TransaktieDto {
         return rekening;
     }
 
-    public String getTags() {
-        return tags;
+    public List<String> getTags() {
+        return Collections.unmodifiableList(this.tags);
     }
 
     public void addTag(String tag) {
-        if (tags == null) {
-            tags = tag;
-        } else {
-            tags = tags + ", " + tag;
-        }
+        this.tags.add(tag);
     }
 }

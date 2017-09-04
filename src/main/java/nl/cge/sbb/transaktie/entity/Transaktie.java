@@ -104,6 +104,18 @@ public class Transaktie {
         return true;
     }
 
+    public String getAsString() {
+        StringBuilder builder = new StringBuilder();
+        append(builder, getRekening().getAsString());
+        append(builder, getTegenrekening().getAsString());
+        append(builder, getOmschrijvingAsString());
+        return builder.toString();
+    }
+
+    private StringBuilder append(StringBuilder builder, String field) {
+        return builder.append(" ").append(field);
+    }
+
     @Override
     public String toString() {
         return "Transaktie{" +

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by chris on 08-05-17.
@@ -22,11 +23,17 @@ public class FindTransaktiesService {
         TagMatcher tagMatcher = new TagMatcher(searchString);
         Optional<String> tag = tagMatcher.getTag();
         Optional<String> query = tagMatcher.getQuery();
-        return transakties.getWrappedTransakties()
-            .stream()
-            .filter(t -> t.getOmschrijvingAsString().contains(query.orElse("")))
-            .filter(t -> t.hasTag(tag))
-            .collect(Collectors.toList());
+        Stream<Transaktie> transaktieStream = transakties.getWrappedTransakties()
+                .stream()
+                .filter(t -> t.hasTag(tag));
+        if (query.isPresent()) {
+            int i = 0;
+            for (String q : query.get().split(" ")) {
+                System.out.println(++i + " Query: " + q);
+                transaktieStream = transaktieStream.filter(t -> t.getAsString().contains(q));
+            }
+        }
+        return transaktieStream.collect(Collectors.toList());
     }
 
     public List<Transaktie> findByRekeningnummer(String rekeningnummer, Optional<String> searchString) {
