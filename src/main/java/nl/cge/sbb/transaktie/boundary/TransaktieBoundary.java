@@ -37,7 +37,7 @@ public class TransaktieBoundary {
 
     @RequestMapping(value = "/importeer", method = RequestMethod.POST)
     public BoundaryResult<Void> importeer() {
-        Transakties transakties = importTransaktieService.execute("csvinput.csv");
+        Transakties transakties = importTransaktieService.execute("transactions.txt");
         Map<String, String> queriesWithTag = queryDao.readAll();
         for (String query : queriesWithTag.keySet()) {
             findAndTag(query, queriesWithTag.get(query));

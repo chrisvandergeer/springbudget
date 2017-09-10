@@ -37,6 +37,7 @@ public class ImportTransaktieService {
         try {
             List<Transaktie> collect = Files.lines(Paths.get(filePath))
                     .map(mapNaarTransaktie)
+                    .sorted((t1, t2) -> t2.getTransaktiedatum().compareTo(t1.getTransaktiedatum()))
                     .collect(Collectors.toList());
             transakties.addTransakties(collect);
             return transakties;
