@@ -1,5 +1,7 @@
-package nl.cge.sbb.aggregaties;
+package nl.cge.sbb.aggregaties.boundary;
 
+import nl.cge.sbb.aggregaties.entity.MaandTotaal;
+import nl.cge.sbb.aggregaties.control.MaandTotaalAggregator;
 import nl.cge.sbb.transaktie.control.FindTransaktiesService;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -29,14 +27,8 @@ public class MaandTotalenBoundary {
     @RequestMapping(method = RequestMethod.GET)
     public List<MaandTotaal> find(@RequestParam(value = "search", required = false) String searchOrNull) {
         List<Transaktie> transakties = findTransaktiesService.find(Optional.of(searchOrNull));
-        MaandTotaalResult result = new MaandTotaalResult();
+        MaandTotaalAggregator result = new MaandTotaalAggregator();
         transakties.forEach(t -> result.add(t));
-        result.finish();
-        List<MaandTotaal> list = new ArrayList<>();
-        Map<LocalDate, BigDecimal> totalen = result.getTotalen();
-        for (LocalDate datum : totalen.keySet()) {
-            list.add(new MaandTotaal(datum, totalen.get(datum)));
-        }
-        return list;
+        return result.finish();
     }
 }

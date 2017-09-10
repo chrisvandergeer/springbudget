@@ -1,5 +1,6 @@
 package nl.cge.sbb.aggregaties;
 
+import nl.cge.sbb.aggregaties.control.MaandTotaalAggregator;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,11 +19,11 @@ import static org.junit.Assert.assertThat;
  */
 public class MaandTotaalResultTest {
 
-    private MaandTotaalResult maandTotaalResult;
+    private MaandTotaalAggregator maandTotaalResult;
 
     @Before
     public void setup() {
-        maandTotaalResult = new MaandTotaalResult();
+        maandTotaalResult = new MaandTotaalAggregator();
     }
 
     @Test

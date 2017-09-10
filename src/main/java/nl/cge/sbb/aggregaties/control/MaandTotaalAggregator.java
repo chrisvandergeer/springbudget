@@ -1,17 +1,16 @@
-package nl.cge.sbb.aggregaties;
+package nl.cge.sbb.aggregaties.control;
 
+import nl.cge.sbb.aggregaties.entity.MaandTotaal;
 import nl.cge.sbb.transaktie.entity.Transaktie;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by chris on 05-09-17.
  */
-public class MaandTotaalResult {
+public class MaandTotaalAggregator {
 
     private Map<LocalDate, BigDecimal> totalen = new TreeMap<>();
 
@@ -28,7 +27,7 @@ public class MaandTotaalResult {
         return totalen;
     }
 
-    public void finish() {
+    public List<MaandTotaal> finish() {
         if (getTotalen().size() > 0) {
             Optional<LocalDate> min = totalen.keySet().stream().min((a, b) -> a.compareTo(b));
             Optional<LocalDate> max = totalen.keySet().stream().max((a, b) -> a.compareTo(b));
@@ -40,5 +39,13 @@ public class MaandTotaalResult {
                 }
             }
         }
+        List<MaandTotaal> list = new ArrayList<>();
+        for (LocalDate datum : totalen.keySet()) {
+            list.add(new MaandTotaal(datum, totalen.get(datum)));
+        }
+        if (list.size() > 12) {
+            list = list.subList(list.size() - 12, list.size());
+        }
+        return list;
     }
 }

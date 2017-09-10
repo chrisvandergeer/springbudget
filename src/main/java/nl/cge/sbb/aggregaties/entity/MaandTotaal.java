@@ -1,4 +1,4 @@
-package nl.cge.sbb.aggregaties;
+package nl.cge.sbb.aggregaties.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
