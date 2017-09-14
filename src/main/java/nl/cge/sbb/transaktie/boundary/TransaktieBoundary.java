@@ -47,7 +47,7 @@ public class TransaktieBoundary {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<TransaktieDto> findAll(
+    public List<TransaktieDto> find(
             @RequestParam(value = "search", required = false) String searchOrNull) {
         List<Transaktie> transakties = findTransaktiesService.find(Optional.ofNullable(searchOrNull));
         return mapper.map(transakties);
@@ -69,29 +69,6 @@ public class TransaktieBoundary {
         return mapper.map(result);
     }
 
-    @RequestMapping(value = "/datum/{jaar}", method = RequestMethod.GET)
-    public BoundaryResult<List<TransaktieDto>> findByJaar(
-            @PathVariable("jaar") Integer jaar) {
-
-        return createResult(findTransaktiesService.findByJaar(jaar));
-    }
-
-    @RequestMapping(value = "/datum/{jaar}/{maand}", method = RequestMethod.GET)
-        public BoundaryResult<List<TransaktieDto>> findByMaand(
-                @PathVariable("jaar") Integer jaar,
-                @PathVariable("maand") Integer maand) {
-
-        return createResult(findTransaktiesService.findByMaand(jaar, maand));
-    }
-
-    @RequestMapping(value = "/tegenrekening/{rekeningnummer}", method = RequestMethod.GET)
-    public BoundaryResult<List<TransaktieDto>> findByRekeningnummer(
-            @PathVariable("rekeningnummer") String rekeningnummer,
-            @RequestParam(value = "search", required = false) String searchOrNull) {
-
-        return createResult(findTransaktiesService.findByRekeningnummer(
-                rekeningnummer, Optional.ofNullable(searchOrNull)));
-    }
 
     private BoundaryResult<List<TransaktieDto>> createResult(List<Transaktie> result) {
         return BoundaryResult.successWithListResult(TransaktieDto.class)

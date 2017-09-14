@@ -1,0 +1,16 @@
+= Tag
+
+== Delete all
+_Verwijderd alle tags_
+
+.URL
+
+ /tag
+
+.Method
+
+ DELETE
+
+.Voorbeeld
+
+ /tag

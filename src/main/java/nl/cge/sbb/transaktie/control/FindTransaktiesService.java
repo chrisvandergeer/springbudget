@@ -36,25 +36,4 @@ public class FindTransaktiesService {
         return transaktieStream.collect(Collectors.toList());
     }
 
-    public List<Transaktie> findByRekeningnummer(String rekeningnummer, Optional<String> searchString) {
-        return transakties.getWrappedTransakties().stream()
-                .filter(t -> rekeningnummer.equals(t.getTegenrekening().getNummer()))
-                .filter(t -> t.getOmschrijvingAsString().contains(searchString.orElse("")))
-                .collect(Collectors.toList());
-    }
-
-    public List<Transaktie> findByJaar(Integer jaar) {
-        System.out.println("Jaar: " + jaar);
-        return transakties.getWrappedTransakties().stream()
-                .filter(t -> t.getJaar().equals(jaar))
-                .collect(Collectors.toList());
-    }
-
-    public List<Transaktie> findByMaand(Integer jaar, Integer maand) {
-        return transakties.getWrappedTransakties().stream()
-                .filter(t -> t.getJaar().equals(jaar))
-                .filter(t -> t.getMaand().equals(maand))
-                .collect(Collectors.toList());
-    }
-
 }

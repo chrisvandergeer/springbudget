@@ -1,0 +1,5 @@
+= Index
+
+* link:transakties.html[transakties]
+* link:tag.html[tag]
+* link:aggregatie.html[aggregatie]

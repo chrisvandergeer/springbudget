@@ -1,0 +1,21 @@
+= Aggregatie
+
+== Find
+_Toont totalen per maand op basis van het zoekresultaat_
+
+.URL
+
+ /aggregratie
+
+.Method
+
+ GET
+
+.URL Params
+
+ Optioneel: search=alfanumeriek
+
+.Voorbeeld
+
+ /aggregratie
+ /aggregratie?search=Pinautomaat

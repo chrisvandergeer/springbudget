@@ -55,6 +55,28 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.3</version>
+                <configuration>
+                    <!-- (2) defaults to src/main/asciidoc -->
+                    <sourceDirectory>rest-doc</sourceDirectory>
+                    <!-- (3) defaults to docbook -->
+                    <backend>html5</backend>
+                    <!-- (4) defaults to target/generated-docs -->
+                    <outputDirectory>target/rest-doc</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

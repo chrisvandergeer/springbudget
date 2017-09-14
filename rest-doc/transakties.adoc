@@ -1,0 +1,55 @@
+= Transakties
+
+== Find
+_Toont alle transakties of alle transakties die voldoen aan het zoekcriterium_
+
+.URL
+
+ /transaktie
+
+.Method
+
+ GET
+
+.URL Params
+
+ Optioneel: search=alfanumeriek
+
+.Voorbeeld
+
+ /transaktie
+ /transaktie?search=Pinautomaat
+
+== Find and tag
+_Zoekt transakties die voldoen aan het zoekcriterium en voegt opgegeven tag toe_
+
+.URL
+ /transaktie
+
+.Method
+
+ POST
+
+.URL Params
+
+ Verplicht: search=alfanumeriek
+ Verplicht: tag=alfanumeriek
+
+.Voorbeeld
+
+ /transaktie?search=Pinautomaat&tag=pin
+
+== Importeer
+_Importeer transakties_
+
+.URL
+
+ /transaktie/importeer
+
+.Method
+
+ POST
+
+.Voorbeeld
+
+ /transaktie/importeer
